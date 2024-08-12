@@ -1,34 +1,34 @@
 package com.java.Crud.controllers;
 
-import com.java.Crud.models.DarwinModel;
-import com.java.Crud.services.DarwinServices;
+import com.java.Crud.models.UserModel;
+import com.java.Crud.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
 
-class DarwinController {
+class UserController {
     @Autowired
-    private DarwinServices userService;
+    private UserServices userService;
     @GetMapping
-    public ArrayList<DarwinModel>getUsers(){
+    public ArrayList<UserModel>getUsers(){
         return this.userService.getUsers();
     }
     @PostMapping
-    public DarwinModel saveUser(@RequestBody DarwinModel user ){
+    public UserModel saveUser(@RequestBody UserModel user ){
         return this.userService.saveUser(user);
     }
     @GetMapping(path = "/{id}")
-    public Optional<DarwinModel> getUserById(@PathVariable Long id){
+    public Optional<UserModel> getUserById(@PathVariable Long id){
         return this.userService.getById(id);
     }
+
     @PutMapping(path = "/{id}")
-    public DarwinModel updateUserById(@RequestBody DarwinModel request, @PathVariable("id") Long id){
+    public UserModel updateUserById(@RequestBody UserModel request, @PathVariable("id") Long id){
         return this.userService.updateById(request, id);
     }
     @DeleteMapping(path = "/{id}")
@@ -36,7 +36,7 @@ class DarwinController {
         boolean ok=this.userService.deleteUser(id);
 
         if(ok){
-            return "User with id "+ id+" deleted";
+            return "Usuario con id "+ id+" eliminado correctamente";
         }else {
             return "Error";
         }
