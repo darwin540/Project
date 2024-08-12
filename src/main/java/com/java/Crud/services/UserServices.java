@@ -27,22 +27,13 @@ public class UserServices {
 
     public UserModel updateById(UserModel request, Long id){
         Optional<UserModel> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            UserModel userUpdate = user.get();
-            userUpdate.setNombre(request.getNombre());
-            userUpdate.setApellido(request.getApellido());
-            userUpdate.setEmail(request.getEmail());
 
+        UserModel userUpdate = user.get();
+        userUpdate.setNombre(request.getNombre());
+        userUpdate.setApellido(request.getApellido());
+        userUpdate.setEmail(request.getEmail());
+        return userRepository.save(userUpdate);
 
-            return userRepository.save(userUpdate);
-        } else {
-            throw new RuntimeException("Usuario no encontrado");
-        }
-
-        //user.setNombre(request.getNombre());
-        //user.setApellido(request.getApellido());
-        //user.setEmail(request.getEmail());
-        //return user;
     }
     public Boolean deleteUser(Long id){
         try {

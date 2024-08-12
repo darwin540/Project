@@ -23,14 +23,24 @@ class UserController {
         return this.userService.saveUser(user);
     }
     @GetMapping(path = "/{id}")
-    public Optional<UserModel> getUserById(@PathVariable Long id){
+    public Optional<UserModel> getUserById(@PathVariable Long id) {
         return this.userService.getById(id);
     }
-
+    /*
     @PutMapping(path = "/{id}")
     public UserModel updateUserById(@RequestBody UserModel request, @PathVariable("id") Long id){
         return this.userService.updateById(request, id);
     }
+
+     */
+
+    @PutMapping(path = "/{id}")
+    public String updateUserById(@RequestBody UserModel request, @PathVariable("id") Long id) {
+        this.userService.updateById(request, id);
+        return "Usuario " + id + " fue actualizado correctamente!";
+    }
+
+
     @DeleteMapping(path = "/{id}")
     public String deleteUserById(@PathVariable("id")Long id){
         boolean ok=this.userService.deleteUser(id);
